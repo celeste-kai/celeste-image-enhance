@@ -1,0 +1,9 @@
+Metadata-Version: 2.4
+Name: celeste-image-enhance
+Version: 0.1.0
+Summary: Image enhancement across providers for Celeste
+Requires-Python: >=3.13
+Requires-Dist: celeste-core>=0.1.0
+Requires-Dist: aiohttp>=3.9.0
+Requires-Dist: Pillow
+Requires-Dist: streamlit-image-comparison>=0.0.4

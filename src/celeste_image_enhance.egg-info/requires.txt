@@ -1,0 +1,4 @@
+celeste-core>=0.1.0
+aiohttp>=3.9.0
+Pillow
+streamlit-image-comparison>=0.0.4
