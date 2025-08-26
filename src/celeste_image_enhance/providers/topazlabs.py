@@ -17,7 +17,7 @@ class TopazLabsImageEnhancer(BaseImageEnhancer):
 
     def __init__(self, model: str = "Standard V2", **kwargs: Any) -> None:
         super().__init__(**kwargs)
-        self.model_name = model
+        self.model = model
         self.api_key = settings.topazlabs.api_key
         self.base_url = "https://api.topazlabs.com/image/v1"
 
@@ -33,7 +33,7 @@ class TopazLabsImageEnhancer(BaseImageEnhancer):
 
         # Prepare form data
         data = aiohttp.FormData()
-        data.add_field("model", self.model_name)
+        data.add_field("model", self.model)
         data.add_field("scale", str(scale_factor))
         data.add_field(
             "image",
@@ -73,7 +73,7 @@ class TopazLabsImageEnhancer(BaseImageEnhancer):
             data=enhanced_data,
             metadata={
                 "provider": Provider.TOPAZLABS,
-                "model": self.model_name,
+                "model": self.model,
                 "enhancement_type": enhancement_type,
             },
         )
