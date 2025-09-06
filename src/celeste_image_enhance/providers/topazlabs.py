@@ -26,7 +26,7 @@ class TopazLabsImageEnhancer(BaseImageEnhancer):
         image: ImageArtifact,
         enhancement_type: EnhancementType = "enhance",
         scale_factor: int = 2,
-        **kwargs: Any,
+        **kwargs: Any,  # noqa: ARG002
     ) -> ImageArtifact:
         """Enhance an image using Topaz Labs API."""
         headers = {"X-API-Key": self.api_key}
@@ -51,18 +51,14 @@ class TopazLabsImageEnhancer(BaseImageEnhancer):
 
             # Poll for completion
             while True:
-                async with session.get(
-                    f"{self.base_url}/status/{job_id}", headers=headers
-                ) as response:
+                async with session.get(f"{self.base_url}/status/{job_id}", headers=headers) as response:
                     status_result = await response.json()
                     if status_result["status"] == "Completed":
                         break
                     await asyncio.sleep(2)
 
             # Get download URL and fetch image
-            async with session.get(
-                f"{self.base_url}/download/{job_id}", headers=headers
-            ) as response:
+            async with session.get(f"{self.base_url}/download/{job_id}", headers=headers) as response:
                 download_info = await response.json()
                 image_url = download_info["download_url"]
 
